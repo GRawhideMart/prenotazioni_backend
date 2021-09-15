@@ -20,12 +20,14 @@ app.post("/", (req, res) => {
 
 // Run server
 const PORT = process.env.PORT || 8081;
-app.listen(PORT, async () => {
-  try {
-    await db.authenticate();
+
+db.authenticate()
+  .then(() => {
     console.log("Connection estabilished successfully");
-    console.log(`Server listening on port ${PORT}`);
-  } catch (err) {
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
     console.error("Couldn't connect to database:", err.message);
-  }
-});
+  });
