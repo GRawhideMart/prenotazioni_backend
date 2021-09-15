@@ -11,13 +11,4 @@ const db = new Sequelize(
   }
 );
 
-const testDB = async () => {
-  try {
-    await db.authenticate();
-    console.log("Connection estabilished successfully");
-  } catch (err) {
-    console.error("Couldn't connect to database:", err.message);
-  }
-};
-
-module.exports = { db, testDB };
+module.exports = db;
