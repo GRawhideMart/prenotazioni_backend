@@ -3,7 +3,7 @@ const cors = require("cors");
 
 // Database
 const db = require("./database/db.config");
-const Inventary = require("./models/Inventary");
+const Inventary = require("./models/inventary.model");
 (async () => {
   await db.sync();
   console.log("Database synched correctly");
@@ -22,17 +22,7 @@ app.use(
 );
 
 // Routing
-app.get("/", (req, res) => {
-  res.sendStatus(200);
-});
-app.post("/inventario", (req, res) => {
-  const item = Inventary.create(req.body)
-    .then((item) => {
-      console.log("Entry created");
-      res.json(item);
-    })
-    .catch((err) => console.error(err.message));
-});
+app.use("/api/inventary", require("./routes/inventary.route"));
 
 // Run server
 const PORT = process.env.PORT || 8081;
