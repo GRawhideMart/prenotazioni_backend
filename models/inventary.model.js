@@ -32,7 +32,7 @@ const Inventary = db.define(
     },
     priorita_sostituzione: {
       type: DataTypes.ENUM("BASSO", "MEDIO", "ALTO"),
-      allowNull: false,
+      defaultValue: "BASSO",
     },
   },
   {
