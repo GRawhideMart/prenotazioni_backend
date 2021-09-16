@@ -1,7 +1,8 @@
 const express = require("express");
+const cors = require("cors");
 
 // Database
-const db = require("./database/dbConfig");
+const db = require("./database/db.config");
 const Inventary = require("./models/Inventary");
 (async () => {
   await db.sync();
@@ -13,6 +14,12 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 // Routing
 app.get("/", (req, res) => {
